@@ -25,20 +25,9 @@ pipeline{
                 
             }
         }
-        stage ('CodeReview')
-        {
-            steps{
-                
-             sh  'mvn pmd:pmd'
-                
-            }
-            post{
-                success{
-                    recordIssues(tools: [pmdParser(pattern: '**/pmd.xml')])
-                }
-            }
+        
         }
-        stage ('Test')
+        stage ('Test code')
         {
             steps{
                 
@@ -52,7 +41,7 @@ pipeline{
         }
         }
         
-        stage('package')
+        stage('package code')
         {
             steps{
                 sh 'mvn package'
